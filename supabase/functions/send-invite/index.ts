@@ -8,7 +8,7 @@
 // what the caller is allowed to see. RLS only shows invitations to owners of
 // the organization, so a member (or a stranger with a guessed id) gets a 404,
 // and nothing here re-implements that rule.
-import { createClient } from 'npm:@supabase/supabase-js@2'
+import { createClient } from '@supabase/supabase-js'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',

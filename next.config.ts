@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  // The default bottom-left spot covers the sidebar's "Sign out" button.
+  devIndicators: { position: 'bottom-right' },
   async headers() {
     return [
       {

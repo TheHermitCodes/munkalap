@@ -31,6 +31,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
       - uses: supabase/setup-cli@v1
         with:
           version: latest
@@ -40,5 +45,5 @@ jobs:
       # Fails if someone changed the schema without regenerating the types.
       - name: Generated types match the schema
         run: |
-          supabase gen types typescript --local > /tmp/database.types.ts
-          diff -u lib/database.types.ts /tmp/database.types.ts
+          npm run db:types
+          git diff --exit-code lib/database.types.ts
