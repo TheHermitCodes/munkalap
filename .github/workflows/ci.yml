@@ -35,13 +35,12 @@ jobs:
         with:
           node-version: 24
           cache: npm
+      # The Supabase CLI comes from package-lock.json, so CI generates types
+      # with exactly the version used locally.
       - run: npm ci
-      - uses: supabase/setup-cli@v1
-        with:
-          version: latest
       # Applies every migration and the seed to a fresh Postgres.
-      - run: supabase db start
-      - run: supabase test db
+      - run: npx supabase db start
+      - run: npx supabase test db
       # Fails if someone changed the schema without regenerating the types.
       - name: Generated types match the schema
         run: |
